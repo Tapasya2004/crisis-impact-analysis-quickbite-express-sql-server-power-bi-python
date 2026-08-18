@@ -1,24 +1,85 @@
-# QuickBite Data Dictionary
+# Data Documentation
 
-The source challenge package contains the following fact and dimension tables.
+## Data Overview
 
-| Table | Key analytical fields |
-|---|---|
-| `fact_orders` | `order_id`, `customer_id`, `restaurant_id`, `delivery_partner_id`, `order_timestamp`, `subtotal_amount`, `discount_amount`, `delivery_fee`, `total_amount`, `is_cod`, `is_cancelled` |
-| `fact_order_items` | `order_id`, `item_id`, `menu_item_id`, `restaurant_id`, `quantity`, `unit_price`, `item_discount`, `line_total` |
-| `fact_ratings` | `order_id`, `customer_id`, `restaurant_id`, `rating`, `review_text`, `review_timestamp`, `sentiment_score` |
-| `fact_delivery_performance` | `order_id`, `actual_delivery_time_mins`, `expected_delivery_time_mins`, `distance_km` |
-| `dim_customer` | `customer_id`, `signup_date`, `city`, `acquisition_channel` |
-| `dim_restaurant` | `restaurant_id`, `restaurant_name`, `city`, `cusini_type`, `partner_type`, `avg_prep_time`, `is_active` |
-| `dim_delivery_partner` | `delivery_partner_id`, `partner_name`, `city`, `vehicle_type`, `employment`, `avg_rating`, `is_active` |
-| `dim_menu_item` | `menu_item_id`, `restaurant_id`, `item_name`, `category`, `is_veg`, `price` |
+The QuickBite Express analysis uses approximately 149K orders
+covering January–September 2025.
 
-## Analytical Outputs
+The data was stored and processed in SQL Server and organized into
+three analytical layers:
 
-The Power BI model also contains derived/calculated analytical structures such as:
+Raw Data → Cleaned Data → Analytical Tables
 
-- `calculated_customer`
-- `calculated_restaurant`
-- `high_value_customer`
+## Raw Data
 
-The Python customer-intelligence workflow additionally produces a customer-level recommendation dataset containing segmentation, risk flags, recovery priority, priority band, and recommended action.
+Raw source tables used the `fact_*` and `dim_*` naming convention.
+
+| Table | Records |
+|---|---:|
+| fact_order | 149,166 |
+| fact_order_items | 342,994 |
+| fact_delivery_performance | 149,166 |
+| fact_ratings | 68,842 |
+| dim_customer | 107,776 |
+| dim_menu_item | 342,671 |
+| dim_restaurant | 19,995 |
+| dim_delivery_partner_ | 15,000 |
+
+## Cleaned Data
+
+The cleaned layer contains tables without the `fact_` / `dim_`
+prefix.
+
+| Table | Records |
+|---|---:|
+| orders | 149,166 |
+| order_items | 342,994 |
+| delivery_performance | 149,166 |
+| ratings | 68,825 |
+| customer | 107,776 |
+| menu_item | 342,671 |
+| restaurant | 19,995 |
+| delivery_partner | 15,000 |
+
+## Analytical Tables
+
+| Table | Records | Purpose |
+|---|---:|---|
+| calculated_customer | 107,776 | Customer-level pre/post-crisis metrics |
+| calculated_restaurant | 19,995 | Restaurant-level crisis impact |
+| high_value_customer | 5,259 | High-value customer identification |
+| customer_reccommendations | 94,357 | Recovery priority and recommendation engine |
+
+## Transformation Workflow
+
+Raw SQL Server tables
+→ cleaning and validation
+→ cleaned analytical tables
+→ customer/restaurant aggregations
+→ customer segmentation and recovery scoring
+→ Power BI business reporting
+
+## Data Preparation
+
+The analysis included:
+
+- Data validation
+- Duplicate/consistency checks
+- Pre-crisis vs crisis classification
+- Customer-level aggregation
+- Restaurant-level aggregation
+- Revenue calculations
+- Order and cancellation analysis
+- Delivery-performance analysis
+- Customer rating analysis
+- Loyal/high-value customer identification
+
+## Data Availability
+
+The original datasets are not included in this repository because the
+project data is stored in SQL Server and the full dataset is too large
+for a lightweight portfolio repository.
+
+The repository therefore documents the data architecture, schema,
+transformation process, and analytical outputs rather than distributing
+the complete source data.
