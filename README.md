@@ -62,7 +62,7 @@ Raw datasets are intentionally excluded from the repository to avoid committing 
 | Machine learning | scikit-learn, K-Means, PCA |
 | Data preparation | SQL Server, SQL |
 | Visualization | Power BI |
-| Notebook | Jupyter Notebook |
+| Notebook | VsCode Jupyter Notebook |
 | Analysis | Customer segmentation, cohort comparison, KPI analysis, recovery scoring |
 
 ## Project Workflow
