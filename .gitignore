@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Large/raw analytical data
+/data/*.csv
+/data/*.csv.gz
+/data/*.parquet
+/data/*.xlsx
+/data/raw/
+data/raw/
+
+# Local database / temporary exports
+*.bak
+*.db
+*.sqlite
+*.sqlite3
+
+# Local Power BI cache / temporary files
+*.pbiq
+*.tmp
